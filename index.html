@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERC-4337 ZetaChain Demo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-16">
+                    <div class="logo">
+                        <h1 class="logo-text">⚡ ERC-4337 ZetaChain Demo</h1>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button id="themeToggle" class="btn btn--secondary btn--sm">🌙</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <!-- Landing Section -->
+        <section id="landing" class="section section--hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h2>Demonstração do Protocolo ERC-4337 na ZetaChain</h2>
+                    <p class="hero-description">
+                        Explore como o ERC-4337 (Account Abstraction) funciona na ZetaChain usando Particle Network.
+                        Este demo demonstra Smart Accounts, transações gasless e UserOperations.
+                    </p>
+                    
+                    <div class="cards-grid">
+                        <div class="card info-card">
+                            <div class="card__body">
+                                <h3>🔧 UserOperations</h3>
+                                <p>Objetos pseudo-transacionais que representam operações a serem executadas pelo usuário.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="card info-card">
+                            <div class="card__body">
+                                <h3>📦 Bundlers</h3>
+                                <p>Coletam UserOperations de múltiplos usuários e submetem em lotes ao EntryPoint.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="card info-card">
+                            <div class="card__body">
+                                <h3>🎯 EntryPoint</h3>
+                                <p>Contrato singleton que executa UserOperations validadas pelos bundlers.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="card info-card">
+                            <div class="card__body">
+                                <h3>🔐 Smart Accounts</h3>
+                                <p>Contas de contrato inteligente que oferecem funcionalidades avançadas ao usuário.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="card info-card">
+                            <div class="card__body">
+                                <h3>💸 Paymasters</h3>
+                                <p>Permitem flexibilidade no pagamento de gas fees, incluindo transações gasless.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="card info-card">
+                            <div class="card__body">
+                                <h3>⚡ ZetaChain</h3>
+                                <p>Blockchain omnichain que conecta todas as redes de forma nativa e segura.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button id="startDemo" class="btn btn--primary btn--lg">Começar Demo</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Authentication Section -->
+        <section id="auth" class="section section--auth hidden">
+            <div class="container">
+                <div class="auth-content">
+                    <h2>Conecte-se com Social Login</h2>
+                    <p>Use o Particle Network para criar sua Smart Account na ZetaChain</p>
+                    
+                    <div class="auth-methods">
+                        <button class="auth-btn" data-provider="google">
+                            <span class="auth-icon">🔗</span>
+                            <span>Conectar com Google</span>
+                        </button>
+                        
+                        <button class="auth-btn" data-provider="twitter">
+                            <span class="auth-icon">🐦</span>
+                            <span>Conectar com Twitter/X</span>
+                        </button>
+                        
+                        <button class="auth-btn" data-provider="github">
+                            <span class="auth-icon">🐙</span>
+                            <span>Conectar com GitHub</span>
+                        </button>
+                        
+                        <button class="auth-btn" data-provider="email">
+                            <span class="auth-icon">📧</span>
+                            <span>Conectar com Email</span>
+                        </button>
+                    </div>
+                    
+                    <div id="authStatus" class="auth-status hidden">
+                        <div class="status status--info">
+                            <span id="authMessage">Conectando...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section section--dashboard hidden">
+            <div class="container">
+                <div class="dashboard-header">
+                    <h2>Smart Account Dashboard</h2>
+                    <button id="logoutBtn" class="btn btn--outline btn--sm">Logout</button>
+                </div>
+                
+                <div class="dashboard-grid">
+                    <!-- User Info -->
+                    <div class="card">
+                        <div class="card__body">
+                            <h3>Informações do Usuário</h3>
+                            <div class="user-info">
+                                <div class="user-avatar" id="userAvatar">👤</div>
+                                <div class="user-details">
+                                    <div class="user-name" id="userName">-</div>
+                                    <div class="user-email" id="userEmail">-</div>
+                                    <div class="user-provider" id="userProvider">-</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Account Info -->
+                    <div class="card">
+                        <div class="card__body">
+                            <h3>Smart Account</h3>
+                            <div class="account-info">
+                                <div class="account-field">
+                                    <label>Endereço:</label>
+                                    <code id="accountAddress">Carregando...</code>
+                                </div>
+                                <div class="account-field">
+                                    <label>Saldo ZETA:</label>
+                                    <span id="accountBalance" class="balance">Carregando...</span>
+                                </div>
+                                <div class="account-field">
+                                    <label>Rede:</label>
+                                    <span class="status status--success">ZetaChain Testnet</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Transaction Demo -->
+                    <div class="card transaction-card">
+                        <div class="card__body">
+                            <h3>Demonstração de UserOperation</h3>
+                            
+                            <div class="transaction-options">
+                                <button class="transaction-btn" data-type="send">
+                                    <span>💸</span>
+                                    <span>Enviar 0.001 ZETA</span>
+                                </button>
+                                
+                                <button class="transaction-btn" data-type="batch">
+                                    <span>📦</span>
+                                    <span>Operação em Lote</span>
+                                </button>
+                                
+                                <button class="transaction-btn" data-type="gasless">
+                                    <span>⛽</span>
+                                    <span>Transação Gasless</span>
+                                </button>
+                            </div>
+                            
+                            <div id="transactionStatus" class="transaction-status hidden">
+                                <div class="transaction-steps">
+                                    <div class="step" id="step1">
+                                        <span class="step-number">1</span>
+                                        <span>Criando UserOperation...</span>
+                                        <span class="step-status">⏳</span>
+                                    </div>
+                                    <div class="step" id="step2">
+                                        <span class="step-number">2</span>
+                                        <span>Bundler processando...</span>
+                                        <span class="step-status">⏳</span>
+                                    </div>
+                                    <div class="step" id="step3">
+                                        <span class="step-number">3</span>
+                                        <span>EntryPoint executando...</span>
+                                        <span class="step-status">⏳</span>
+                                    </div>
+                                    <div class="step" id="step4">
+                                        <span class="step-number">4</span>
+                                        <span>Confirmando na rede...</span>
+                                        <span class="step-status">⏳</span>
+                                    </div>
+                                </div>
+                                
+                                <div id="transactionResult" class="transaction-result hidden">
+                                    <div class="status status--success">
+                                        Transação confirmada!
+                                    </div>
+                                    <div class="transaction-hash">
+                                        <label>Hash:</label>
+                                        <code id="txHash">-</code>
+                                    </div>
+                                    <a id="explorerLink" href="#" target="_blank" class="btn btn--outline btn--sm">
+                                        Ver no Explorer
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Transaction History -->
+                    <div class="card">
+                        <div class="card__body">
+                            <h3>Histórico de Transações</h3>
+                            <div id="transactionHistory" class="transaction-history">
+                                <div class="empty-state">
+                                    Nenhuma transação ainda. Execute uma operação para ver o histórico.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Educational Section -->
+        <section id="educational" class="section section--educational">
+            <div class="container">
+                <h2>Como Funciona o ERC-4337</h2>
+                
+                <div class="flow-diagram">
+                    <div class="flow-step">
+                        <div class="flow-icon">👤</div>
+                        <h4>1. Usuário</h4>
+                        <p>Cria uma UserOperation com as informações da transação desejada</p>
+                    </div>
+                    
+                    <div class="flow-arrow">→</div>
+                    
+                    <div class="flow-step">
+                        <div class="flow-icon">📦</div>
+                        <h4>2. Bundler</h4>
+                        <p>Coleta múltiplas UserOperations e as agrupa em uma única transação</p>
+                    </div>
+                    
+                    <div class="flow-arrow">→</div>
+                    
+                    <div class="flow-step">
+                        <div class="flow-icon">🎯</div>
+                        <h4>3. EntryPoint</h4>
+                        <p>Valida e executa as UserOperations na Smart Account do usuário</p>
+                    </div>
+                    
+                    <div class="flow-arrow">→</div>
+                    
+                    <div class="flow-step">
+                        <div class="flow-icon">💸</div>
+                        <h4>4. Paymaster</h4>
+                        <p>Patrocina o gas fee, permitindo transações gasless para o usuário</p>
+                    </div>
+                    
+                    <div class="flow-arrow">→</div>
+                    
+                    <div class="flow-step">
+                        <div class="flow-icon">✅</div>
+                        <h4>5. Confirmação</h4>
+                        <p>Transação é confirmada na ZetaChain e registrada no histórico</p>
+                    </div>
+                </div>
+                
+                <div class="educational-cards">
+                    <div class="card">
+                        <div class="card__body">
+                            <h3>📚 Recursos Adicionais</h3>
+                            <ul class="resource-list">
+                                <li><a href="https://eips.ethereum.org/EIPS/eip-4337" target="_blank">EIP-4337 Especificação</a></li>
+                                <li><a href="https://www.zetachain.com/docs" target="_blank">Documentação ZetaChain</a></li>
+                                <li><a href="https://particle.network/" target="_blank">Particle Network</a></li>
+                                <li><a href="https://athens.explorer.zetachain.com" target="_blank">ZetaChain Explorer</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 ERC-4337 ZetaChain Demo. Feito para fins educativos.</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
