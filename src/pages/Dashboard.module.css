@@ -1,0 +1,153 @@
+.dashboard {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.dashboard-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.transaction-form {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.primary-button {
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+}
+
+.primary-button:hover {
+  background-color: #1976D2;
+}
+
+.primary-button:disabled {
+  background-color: #BDBDBD;
+  cursor: not-allowed;
+}
+
+.secondary-button {
+  background-color: #F5F5F5;
+  color: #333;
+  border: 1px solid #ddd;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+}
+
+.secondary-button:hover {
+  background-color: #E0E0E0;
+}
+
+.secondary-button:disabled {
+  background-color: #BDBDBD;
+  cursor: not-allowed;
+}
+
+.batch-form {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.batch-list {
+  margin: 1rem 0;
+}
+
+.batch-item {
+  background: #F5F5F5;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.batch-item p {
+  margin: 0.25rem 0;
+}
+
+.batch-item p strong {
+  color: #333;
+  margin-right: 0.5rem;
+}
+
+.transactions-list {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.transaction-item {
+  background: #F5F5F5;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.transaction-item p {
+  margin: 0.25rem 0;
+}
+
+.transaction-item p strong {
+  color: #333;
+  margin-right: 0.5rem;
+}
+
+.error-message {
+  color: #D32F2F;
+  background: #FFEBEE;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-top: 1rem;
+}
+
+.initialization-status {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.initialization-status p {
+  margin: 1rem 0;
+  color: #666;
+}
